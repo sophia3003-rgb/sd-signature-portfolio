@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Teste SD Signature</title>
+</head>
+<body>
+
+  <h1>SD Signature</h1>
+  <p>Teste de conexão com o Supabase.</p>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+    const SUPABASE_URL = 'COLE_AQUI_A_PROJECT_URL';
+    const SUPABASE_KEY = 'COLE_AQUI_A_PUBLISHABLE_KEY';
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    async function testarConexao() {
+      const { data, error } = await supabase
+        .from('projetos')
+        .select('*');
+
+      if (error) {
+        console.error('Erro:', error);
+        document.body.innerHTML += '<p>❌ Erro na conexão.</p>';
+      } else {
+        console.log('Conexão funcionando!', data);
+        document.body.innerHTML += '<p>✅ Conexão com Supabase funcionando!</p>';
+      }
+    }
+
+    testarConexao();
+  </script>
+
+</body>
+</html>
